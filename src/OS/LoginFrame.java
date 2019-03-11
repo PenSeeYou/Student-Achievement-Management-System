@@ -4,23 +4,21 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
- 
-//LoginFrame 登陆窗口  功能 实现用户登陆 ,如果成功就跳转
-//LoginFrame 继承于窗口类, 并实现ActionListener接口
+
 public class LoginFrame extends JFrame implements ActionListener {
-    // 申明需要的组件
+
     JButton jb1, jb2;//按钮
     JTextField jtf1;//文本框
     JPasswordField jpf1;//密码框
     private String[] args;
  
     public LoginFrame() {
-        // 窗口属性的设置
+
         setTitle("登陆窗");// 窗口标题
         setSize(300, 180);// 窗口大小
         setLocationRelativeTo(null);// 窗口居中
-        setDefaultCloseOperation(EXIT_ON_CLOSE);// 关闭窗口则退出虚拟机
-        setLayout(new FlowLayout());// 设置布局流式布局
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setLayout(new FlowLayout());// 
  
         JPanel jp = new JPanel(new GridLayout(4, 1));// 设置面板为表格布局4行1列
         // 第一行
@@ -86,7 +84,7 @@ public class LoginFrame extends JFrame implements ActionListener {
      
     //main方法, 程序的入口
     public static void main(String[] args) {
-        new LoginFrame().setVisible(true);//创建登录窗口,并可见
+        new LoginFrame().setVisible(true);
     }
  
 }
