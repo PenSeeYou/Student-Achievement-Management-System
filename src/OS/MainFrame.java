@@ -27,9 +27,57 @@ import java.lang.String;
 
 public class MainFrame extends JFrame {
 
+    private static final File ROOT_PATH;
+
+    // 只需要初始化一次
+    static {
+        ROOT_PATH = new File("./database");
+        // 如果目标路径是文件，则删除，因为同一个路径下不能出现同名的文件和文件夹
+        if (ROOT_PATH.isFile()) {
+            ROOT_PATH.delete();
+        }
+        if (!ROOT_PATH.exists()) {
+            ROOT_PATH.mkdirs();
+        }
+    }
+
+    private static boolean createDir(File file) {
+        if (file == null) {
+            return false;
+        }
+
+        if (file.exists() && file.isFile()) {
+            file.delete();
+        }
+
+        if (file.exists() && file.isDirectory()) {
+            return true;
+        } else {
+            file.mkdirs();
+            return true;
+        }
+
+    }
+
+    private static boolean createFile(File file) throws IOException {
+        if (file == null) {
+            return false;
+        }
+        if (file.exists() && file.isDirectory()) {
+            file.delete();
+        }
+
+        if (file.exists() && file.isFile()) {
+            return true;
+        } else {
+            file.createNewFile();
+            return true;
+        }
+    }
+
     public MainFrame(String[] args) {
         // 创建 JFrame 实例
-        JFrame frame = new JFrame("Login Example");
+        JFrame frame = new JFrame("学生成绩管理系统");
         // Setting the width and height of frame
         frame.setSize(320, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -39,16 +87,18 @@ public class MainFrame extends JFrame {
          * 面板中我们可以添加文本字段，按钮及其他组件。
          */
         JPanel panel = new JPanel();
-        // 添加面板
+        // 添加面板        
+        frame.setLocationRelativeTo(null);//居中        
+        //frame.setResizable(false);
         frame.add(panel);
-        /* 
+        /*
          * 调用用户定义的方法并添加组件到面板
          */
         placeComponents(panel);
 
         // 设置界面可见
         frame.setVisible(true);
-        setLocationRelativeTo(null);//居中
+
     }
 
     private static void placeComponents(JPanel panel) {
@@ -56,12 +106,18 @@ public class MainFrame extends JFrame {
         //JTextField dataText = new JTextField("");
         //dataText.setBounds(30,240,250,250);
         //panel.add(dataText);
+        JScrollPane scrollPane_1 = new JScrollPane();
+        scrollPane_1.setBounds(30, 240, 250, 250);
+        scrollPane_1.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED); 
+        panel.add(scrollPane_1);
         JTextArea area = new JTextArea(3, 20);
-        area.setBounds(30, 240, 250, 250);
+        //area.setBounds(30, 240, 250, 250);
         panel.add(area);
-        area.setLineWrap(true);
-        //JScrollPane pane=new JScrollPane(area, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        //area.setLineWrap(true);
 
+        scrollPane_1.setViewportView(area);
+
+        //JScrollPane pane=new JScrollPane(area, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         panel.setLayout(null);
         JLabel nameLabel = new JLabel("          姓名：");
         nameLabel.setBounds(10, 20, 80, 25);
@@ -70,7 +126,7 @@ public class MainFrame extends JFrame {
         JLabel nol = new JLabel("Chinese");
         nol.setBounds(999, 999, 999, 999);
         panel.add(nol);
-        /* 
+        /*
          * 创建文本域用于用户输入
          */
         //
@@ -123,13 +179,14 @@ public class MainFrame extends JFrame {
         findText.setBounds(100, 140, 165, 25);
         panel.add(findText);
 
+        area.append("My GitHub Project is \nhttps://github.com/PenSeeYou/Student-Achievement-Management-System\n");
+
         // 创建录入按钮
         JButton wButton = new JButton("录入");
         wButton.setBounds(40, 170, 80, 25);
         panel.add(wButton);
         wButton.addActionListener(new ActionListener() {
 
-        area.append( "My GitHub Project is \nhttps://github.com/PenSeeYou/Student-Achievement-Management-System");    
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource() == wButton) {
@@ -138,42 +195,54 @@ public class MainFrame extends JFrame {
                         JOptionPane.showMessageDialog(wButton, "录入错误，请检查是否将前四项填写！");
                     } else {
                         try {
-                            new File("DATA").mkdirs();
-                            new File("DATA", "C").mkdirs();
-                            new File("DATA", "M").mkdirs();
-                            new File("DATA", "E").mkdirs();
+
+                            File chinese = new File(ROOT_PATH, "C");
+                            File math = new File(ROOT_PATH, "M");
+                            File english = new File(ROOT_PATH, "E");
+
+                            if (!createDir(chinese) || !createDir(math) || !createDir(english)) {
+                                throw new UnsupportedOperationException("create file dir error");
+                            }
 
                             String a = "Chinese";
                             String nn = nol.getText();
 
-                            if (nn == "语文") {
-                                a = "DATA/C/" + namberText.getText();
+                            if (nn.equals("Chinese")) {
+                                a = chinese.getAbsolutePath() + File.separator + namberText.getText();
+                                if (!createFile(new File(a))) {
+                                    throw new UnsupportedOperationException("create file error");
+                                }
+                                fw = new FileWriter(a);
                                 fw.write("学号:" + namberText.getText() + "号 " + nameText.getText() + " " + "语文" + " " + cText.getText());
                             }
-                            if (nn == "数学") {
-                                a = "DATA/M/" + namberText.getText();
+                            if (nn.equals("Maths")) {
+                                a = math.getAbsolutePath() + File.separator + namberText.getText();
+
+                                if (!createFile(new File(a))) {
+                                    throw new UnsupportedOperationException("create file error");
+                                }
+                                fw = new FileWriter(a);
                                 fw.write("学号:" + namberText.getText() + "号 " + nameText.getText() + " " + "数学" + " " + cText.getText());
                             }
-                            if (nn == "英语") {
-                                a = "DATA/E/" + namberText.getText();
+                            if (nn.equals("English")) {
+                                a = english.getAbsolutePath() + File.separator + namberText.getText();
+                                if (!createFile(new File(a))) {
+                                    throw new UnsupportedOperationException("create file error");
+                                }
+                                fw = new FileWriter(a);
                                 fw.write("学号:" + namberText.getText() + "号 " + nameText.getText() + " " + "英语" + " " + cText.getText());
                             }
-
-                            fw = new FileWriter(a);
 
                             fw.flush();
                             fw.close();
                             JOptionPane.showMessageDialog(wButton, "录入成功！");
                         } catch (Exception ex) {
                             ex.printStackTrace();
+                            JOptionPane.showMessageDialog(wButton, "录入失败！");
                         }
                     }
 
-                    namberText.setText("");
-                    nameText.setText("");
-                    //kText.setText("");
                     cText.setText("");
-                    findText.setText("");
                 }
             }
         });
@@ -183,42 +252,70 @@ public class MainFrame extends JFrame {
         panel.add(fButton);
         fButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+
                 if (findText.getText().trim().equals("")) {
                     JOptionPane.showMessageDialog(fButton, "查询错误，请检查是否将最后一项填写！");
-                }
+                } else {
+                    File chinese = new File(ROOT_PATH, "C");
+                    File math = new File(ROOT_PATH, "M");
+                    File english = new File(ROOT_PATH, "E");
+                    try {
 
-                try {
-                    String FIND = "DATA/C/" + findText.getText();
-                    BufferedReader fin = new BufferedReader(
-                            new FileReader(FIND));
-                    String ss = fin.readLine();
-                    area.append(ss + "\n");
+                        String FIND = chinese.getAbsolutePath() + File.separator + findText.getText();
+                        BufferedReader fin = new BufferedReader(
+                                new FileReader(FIND));
+                        String ss = fin.readLine();
+                        area.append(ss + "\n");
 
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-                try {
-                    String FIND = "DATA/M/" + findText.getText();
-                    BufferedReader fin = new BufferedReader(
-                            new FileReader(FIND));
-                    String ss = fin.readLine();
-                    area.append(ss + "\n");
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
 
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-                try {
-                    String FIND = "DATA/E/" + findText.getText();
-                    BufferedReader fin = new BufferedReader(
-                            new FileReader(FIND));
-                    String ss = fin.readLine();
-                    area.append(ss + "\n");
+                        JOptionPane.showMessageDialog(wButton, "没有找到" + findText.getText() + "号" + "学生的语文成绩");
+                    }
+                    try {
+                        String FIND = math.getAbsolutePath() + File.separator + findText.getText();
+                        BufferedReader fin = new BufferedReader(
+                                new FileReader(FIND));
+                        String ss = fin.readLine();
+                        area.append(ss + "\n");
 
-                } catch (Exception ex) {
-                    ex.printStackTrace();
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                        JOptionPane.showMessageDialog(wButton, "没有找到" + findText.getText() + "号" + "学生的数学成绩");
+                    }
+                    try {
+                        String FIND = english.getAbsolutePath() + File.separator + findText.getText();
+                        BufferedReader fin = new BufferedReader(
+                                new FileReader(FIND));
+                        String ss = fin.readLine();
+                        area.append(ss + "\n");
+
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                        JOptionPane.showMessageDialog(wButton, "没有找到" + findText.getText() + "号" + "学生的英语成绩");
+                    }
                 }
+                findText.setText("");
             }
         });
+
+        JButton nullButton = new JButton("重置");
+        nullButton.setBounds(40, 210, 80, 25);
+        panel.add(nullButton);
+        nullButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                namberText.setText("");
+                nameText.setText("");
+                //kText.setText("");
+                cText.setText("");
+                findText.setText("");
+
+            }
+        });
+
+        JButton paiButton = new JButton("排名");
+        paiButton.setBounds(180, 210, 80, 25);
+        panel.add(paiButton);
     }
 
 }
