@@ -1,5 +1,7 @@
 “＃Student-Achievement-Management-System
 
+此项目由伞恩晨维护，日更！
+
 LOGINFRAME.java参考网络
 
 MAINFRAME.java里面的控件相关参考菜鸟教程
