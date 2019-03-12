@@ -129,6 +129,7 @@ public class MainFrame extends JFrame {
         panel.add(wButton);
         wButton.addActionListener(new ActionListener() {
 
+        area.append( "My GitHub Project is \nhttps://github.com/PenSeeYou/Student-Achievement-Management-System");    
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource() == wButton) {
