@@ -1,6 +1,6 @@
 “＃Student-Achievement-Management-System
 
-此项目由伞恩晨维护，日更！
+此项目由sanenchen维护，日更！
 
 本项目因比赛而建立
 
