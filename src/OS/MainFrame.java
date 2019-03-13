@@ -108,7 +108,7 @@ public class MainFrame extends JFrame {
         //panel.add(dataText);
         JScrollPane scrollPane_1 = new JScrollPane();
         scrollPane_1.setBounds(30, 240, 250, 250);
-        scrollPane_1.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED); 
+        scrollPane_1.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         panel.add(scrollPane_1);
         JTextArea area = new JTextArea(3, 20);
         //area.setBounds(30, 240, 250, 250);
@@ -119,8 +119,8 @@ public class MainFrame extends JFrame {
 
         //JScrollPane pane=new JScrollPane(area, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         panel.setLayout(null);
-        JLabel nameLabel = new JLabel("          姓名：");
-        nameLabel.setBounds(10, 20, 80, 25);
+        JLabel nameLabel = new JLabel("姓名：");
+        nameLabel.setBounds(50, 20, 80, 25);
         panel.add(nameLabel);
 
         JLabel nol = new JLabel("Chinese");
@@ -134,16 +134,16 @@ public class MainFrame extends JFrame {
         nameText.setBounds(100, 20, 165, 25);
         panel.add(nameText);
         //
-        JLabel namberLabel = new JLabel("          学号：");
-        namberLabel.setBounds(10, 50, 80, 25);
+        JLabel namberLabel = new JLabel("学号：");
+        namberLabel.setBounds(50, 50, 80, 25);
         panel.add(namberLabel);
 
         JTextField namberText = new JTextField(20);
         namberText.setBounds(100, 50, 165, 25);
         panel.add(namberText);
         //
-        JLabel kLabel = new JLabel("          科目：");
-        kLabel.setBounds(10, 80, 80, 25);
+        JLabel kLabel = new JLabel("科目：");
+        kLabel.setBounds(50, 80, 80, 25);
         panel.add(kLabel);
 
         JComboBox comboBox = new JComboBox();
@@ -163,17 +163,25 @@ public class MainFrame extends JFrame {
 
         });
         //
-        JLabel cLabel = new JLabel("          成绩：");
-        cLabel.setBounds(10, 110, 80, 25);
+        JLabel cLabel = new JLabel("成绩：");
+        cLabel.setBounds(50, 110, 80, 25);
         panel.add(cLabel);
 
         JTextField cText = new JTextField(20);
         cText.setBounds(100, 110, 165, 25);
         panel.add(cText);
         //
-        JLabel findLabel = new JLabel("     查询学号:");
-        findLabel.setBounds(10, 140, 80, 25);
+        JLabel findLabel = new JLabel("查询学号:");
+        findLabel.setBounds(30, 140, 80, 25);
         panel.add(findLabel);
+
+        double banben;
+
+        banben = 0.85;
+
+        JLabel banbenLabel = new JLabel("版本号:" + banben );
+        banbenLabel.setBounds(10, 550, 320, 25);
+        panel.add(banbenLabel);
 
         JTextField findText = new JTextField(20);
         findText.setBounds(100, 140, 165, 25);
@@ -316,12 +324,12 @@ public class MainFrame extends JFrame {
         JButton paiButton = new JButton("排名");
         paiButton.setBounds(180, 210, 80, 25);
         panel.add(paiButton);
-        paiButton.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
+        paiButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(paiButton, "此功能暂时没有实现，请关注作者GitHub“PenSeeYou”，链接在文本栏，检查是否有更新！");
             }
         });
-            
+
     }
 
 }
