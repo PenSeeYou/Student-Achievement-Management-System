@@ -326,7 +326,7 @@ public class MainFrame extends JFrame {
         panel.add(paiButton);
         paiButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(paiButton, "此功能暂时没有实现，请关注作者GitHub“PenSeeYou”，链接在文本栏，检查是否有更新！");
+                JOptionPane.showMessageDialog(paiButton, "此功能暂时没有实现，请关注作者GitHub“PenSeeYou”也就是我的GitHub，链接在文本栏，检查是否有更新！当前版本:" + banben + "\n如果发布版本大于此版本，可能此功能已完成！建议在GitHub下载新版本源代码并编译！感谢配合！\n");
             }
         });
 
