@@ -89,7 +89,7 @@ public class MainFrame extends JFrame {
         JPanel panel = new JPanel();
         // 添加面板        
         frame.setLocationRelativeTo(null);//居中        
-        //frame.setResizable(false);
+        frame.setResizable(false);
         frame.add(panel);
         /*
          * 调用用户定义的方法并添加组件到面板
@@ -316,6 +316,12 @@ public class MainFrame extends JFrame {
         JButton paiButton = new JButton("排名");
         paiButton.setBounds(180, 210, 80, 25);
         panel.add(paiButton);
+        paiButton.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                JOptionPane.showMessageDialog(paiButton, "此功能暂时没有实现，请关注作者GitHub“PenSeeYou”，链接在文本栏，检查是否有更新！");
+            }
+        });
+            
     }
 
 }
