@@ -1,9 +1,5 @@
 package OS;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -18,12 +14,12 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import java.lang.String;
 
 public class MainFrame extends JFrame {
 
@@ -89,7 +85,7 @@ public class MainFrame extends JFrame {
         JPanel panel = new JPanel();
         // 添加面板        
         frame.setLocationRelativeTo(null);//居中        
-        frame.setResizable(false);
+        //frame.setResizable(false);
         frame.add(panel);
         /*
          * 调用用户定义的方法并添加组件到面板
@@ -177,9 +173,9 @@ public class MainFrame extends JFrame {
 
         double banben;
 
-        banben = 0.85;
+        banben = 0.86;
 
-        JLabel banbenLabel = new JLabel("版本号:" + banben );
+        JLabel banbenLabel = new JLabel("版本号:" + banben);
         banbenLabel.setBounds(10, 550, 320, 25);
         panel.add(banbenLabel);
 
@@ -221,7 +217,7 @@ public class MainFrame extends JFrame {
                                     throw new UnsupportedOperationException("create file error");
                                 }
                                 fw = new FileWriter(a);
-                                fw.write("学号:" + namberText.getText() + "号 " + nameText.getText() + " " + "语文" + " " + cText.getText());
+                                fw.write("学号:" + namberText.getText() + "号 " + nameText.getText() + " " + "语文" + " " + cText.getText() + "\n" + cText.getText());
                             }
                             if (nn.equals("Maths")) {
                                 a = math.getAbsolutePath() + File.separator + namberText.getText();
@@ -269,10 +265,13 @@ public class MainFrame extends JFrame {
                     File english = new File(ROOT_PATH, "E");
                     try {
 
+                        
+                        
                         String FIND = chinese.getAbsolutePath() + File.separator + findText.getText();
                         BufferedReader fin = new BufferedReader(
                                 new FileReader(FIND));
                         String ss = fin.readLine();
+                       File s = new File(FIND);
                         area.append(ss + "\n");
 
                     } catch (Exception ex) {
@@ -305,6 +304,10 @@ public class MainFrame extends JFrame {
                 }
                 findText.setText("");
             }
+
+            private void readAppointedLineNumber(File s, int i) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
         });
 
         JButton nullButton = new JButton("重置");
@@ -326,7 +329,8 @@ public class MainFrame extends JFrame {
         panel.add(paiButton);
         paiButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(paiButton, "此功能暂时没有实现，请关注作者GitHub“PenSeeYou”也就是我的GitHub，链接在文本栏，检查是否有更新！当前版本:" + banben + "\n如果发布版本大于此版本，可能此功能已完成！建议在GitHub下载新版本源代码并编译！感谢配合！\n");
+                JOptionPane.showMessageDialog(paiButton, "此功能暂时没有实现，请关注作者GitHub“PenSeeYou”也就是我的GitHub，链接在文本栏，检查是否有更新！当前版本:" + banben + "\n如果发布版本大于此版本，可能此功能已完成！建议在GitHub重新下载源代码\n");
+
             }
         });
 
