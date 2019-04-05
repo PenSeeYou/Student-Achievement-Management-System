@@ -173,7 +173,7 @@ public class MainFrame extends JFrame {
 
         double banben;
 
-        banben = 0.86;
+        banben = 0.87;
 
         JLabel banbenLabel = new JLabel("版本号:" + banben);
         banbenLabel.setBounds(10, 550, 320, 25);
